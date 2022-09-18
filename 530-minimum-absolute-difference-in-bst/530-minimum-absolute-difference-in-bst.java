@@ -14,43 +14,22 @@
  * }
  */
 class Solution {
+     ArrayList<Integer> li=new ArrayList<>();
     public int getMinimumDifference(TreeNode root) {
-        
-        
-        Stack<TreeNode> st = new Stack<>();
-        
-        TreeNode curr = root;
-        TreeNode prev = null;
-        
-        int res = Integer.MAX_VALUE;
-        
-        while(curr != null || !st.isEmpty()){
-            if(curr != null){
-                st.push(curr);
-                curr = curr.left;
-            }else{
-                curr  = st.pop();
-                if(prev!=null)
-                    res = Math.min(res, curr.val-prev.val);
-                    prev = curr;
-                    curr = curr.right;
-                
-            }
-        }
+      result(root);
+        int res=Integer.MAX_VALUE;
+      for(int i=li.size()-1;i>0;i--){
+          int ans=li.get(i)-li.get(i-1);
+          res=Math.min(ans,res);
+      }
         return res;
-        
+       
+    }
+    void result(TreeNode root){
+        if(root==null)
+            return;
+        result(root.left);
+        li.add(root.val);
+        result(root.right);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
